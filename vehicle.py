@@ -18,7 +18,7 @@ while True:
     if not ret:
         break
 
-    results = yolo.track(frame)  # no stream=True for single frame
+    results = yolo.track(frame,persist=True)  # no stream=True for single frame
 
     for result in results:
         class_names = result.names
@@ -27,7 +27,7 @@ while True:
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
                 cls = int(box.cls[0])
                 class_name = class_names[cls]
-                conf = float(box.conf[0])
+                conf = float(box.conf[0])*100
                 colour = getColours(cls)
 
                 cv2.rectangle(frame, (x1, y1), (x2, y2), colour, 2)
@@ -35,7 +35,7 @@ while True:
                             (x1, max(y1 - 10, 20)), cv2.FONT_HERSHEY_SIMPLEX,
                             0.6, colour, 2)
 
-    if frame_count < 60:
+    if frame_count < 100:
         plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         plt.axis('off')
         plt.pause(0.001)  # non-blocking
