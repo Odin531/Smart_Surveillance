@@ -1,12 +1,1 @@
 *.mp4
-*.jpg
-*.png
-*.yaml
-*.pt
-train/**/*
-valid/**/*
-test/**/*
-Include/**/*
-Lib/**/*
-runs/**/*
-Scripts/**/*
